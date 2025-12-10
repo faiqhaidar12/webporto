@@ -86,7 +86,7 @@
                 >
                     <div v-for="p in filteredProjects" :key="p.name" class="border-t border-slate-700 pt-3 mt-3 first:border-t-0 first:pt-0 first:mt-0 rounded-lg -mx-2 px-2 hover:bg-slate-800/50 transition">
                         <div class="flex items-center justify-between">
-                            <h3 class="text-base font-semibold text-white">{{ p.name }}</h3>
+                            <a :href="p.link" target="_blank" rel="noopener" class="text-base font-semibold text-white hover:text-violet-400 transition">{{ p.name }}</a>
                         </div>
                         <p class="text-slate-300 mt-1">{{ p.desc }}</p>
                         <div class="flex flex-wrap gap-2 mt-2">
@@ -136,7 +136,7 @@ export default {
             mobileNavOpen: false,
             profile: {
                 name: "Fa'iq Haidar",
-                title: 'Fullstack Developer',
+                title: 'Fullstack Web Developer',
                 summary: 'With 2 years of experience building robust web applications, I am skilled in designing functional features, managing databases, and ensuring application stability and usability. I work well in team environments and remain committed to continuous improvement in software quality and development practices.',
                 location: 'Indonesia',
                 socials: [
@@ -144,7 +144,7 @@ export default {
                     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/faiq-haidar-763335219/', icon: 'ph-thin ph-linkedin-logo' },
                     { name: 'Email', url: 'mailto:faiqhaidar1@gmail.com', icon: 'ph-thin ph-envelope' },
                 ],
-                stacks: ['Laravel', 'Vue', 'Livewire', 'Tailwind', 'MySQL', 'REST API', 'Vite'],
+                stacks: ['Laravel', 'Vue', 'Livewire', 'Tailwind', 'MySQL', 'REST API'],
             },
             filters: {
                 search: '',
