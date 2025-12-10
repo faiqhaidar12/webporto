@@ -100,6 +100,7 @@
         <footer :class="['border-t py-6 text-center', isDark ? 'border-[#30363d] text-[#8b949e]' : 'border-[#d0d7de] text-[#656d76]']">© {{ currentYear() }} — Built with Vue</footer>
 </template>
 
+
 <script>
 export default {
     data() {
