@@ -12,6 +12,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Vue 3 via CDN -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+      <!-- Vue 3 SFC Loader to use .vue files without bundling -->
+      <script src="https://unpkg.com/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
     <!-- Icons -->
     <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/thin/style.css">
     <style>
@@ -21,6 +23,26 @@
   <body>
     <div id="app" class="min-h-screen bg-slate-900 text-slate-200"></div>
 
-    <script src="./app.js"></script>
+      <script>
+        const { loadModule } = window['vue3-sfc-loader'];
+        const options = {
+          moduleCache: {
+            vue: Vue,
+          },
+          getFile(url) {
+            return fetch(url).then(res => res.ok ? res.text() : Promise.reject(res));
+          },
+          addStyle(textContent) {
+            const style = document.createElement('style');
+            style.textContent = textContent;
+            document.head.appendChild(style);
+          },
+        };
+
+        (async () => {
+          const App = await loadModule('./app.vue', options);
+          Vue.createApp(App).mount('#app');
+        })();
+      </script>
   </body>
   </html>

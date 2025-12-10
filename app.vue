@@ -1,69 +1,4 @@
-const { createApp, computed } = Vue;
-
-createApp({
-    data() {
-        return {
-            mobileNavOpen: false,
-            profile: {
-                name: "Fa'iq Haidar",
-                title: 'Fullstack Developer',
-                summary: 'Experienced Fullstack Web Developer with 2 years of expertise in building robust web applications. Proficient in designing functional features, managing databases, and ensuring application stability and usability. Skilled in team collaboration and committed to continuous improvement in software development quality.',
-                location: 'Indonesia',
-                socials: [
-                    { name: 'GitHub', url: 'https://github.com/faiqhaidar12', icon: 'ph-thin ph-github-logo' },
-                    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/faiq-haidar-763335219/', icon: 'ph-thin ph-linkedin-logo' },
-                    { name: 'Email', url: 'mailto:faiqhaidar1@gmail.com', icon: 'ph-thin ph-envelope' },
-                ],
-                stacks: ['Laravel', 'Vue', 'Livewire', 'Tailwind', 'MySQL', 'REST API', 'Vite'],
-            },
-            filters: {
-                search: '',
-                tech: 'All',
-            },
-            techOptions: ['All', 'Laravel', 'Vue', 'API', 'Frontend', 'Backend'],
-            projects: [
-                {
-                    name: 'Guruinovatif.id',
-                    desc: 'Certified online learning platform for educators. Develop teaching skills through courses, webinars, and certifications.',
-                    tech: ['Laravel', 'Tailwind','Livewire'],
-                    link: 'https://guruinovatif.id/'
-                },
-                {
-                    name: 'Komunitas Guru Inovatif',
-                    desc: 'Community platform for innovative educators to share resources, ideas, and teaching experiences.',
-                    tech: ['Laravel', 'Livewire', 'API'],
-                    link: 'https://komunitas.guruinovatif.id/'
-                },
-                {
-                    name: 'Karya Guru Inovatif',
-                    desc: 'Public repository of documents, teaching modules, educational materials, articles, and learning media contributed by creators.',
-                    tech: ['Laravel','Livewire','Vue'],
-                    link: 'https://karya.guruinovatif.id/'
-                },
-                {
-                    name: 'Kreator Guru Inovatif',
-                    desc: 'Platform providing opportunities for anyone to contribute educational content: teaching modules, materials, articles, and event hosting.',
-                    tech: ['Laravel', 'Bootstrap'],
-                    link: 'https://kreator.guruinovatif.id/'
-                },
-            ],
-        };
-    },
-    computed: {
-        filteredProjects() {
-            const term = this.filters.search.toLowerCase();
-            const tech = this.filters.tech;
-            return this.projects.filter(p => {
-                const matchTerm = !term || (p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term));
-                const matchTech = tech === 'All' || p.tech.includes(tech);
-                return matchTerm && matchTech;
-            });
-        },
-    },
-    methods: {
-        currentYear() { return new Date().getFullYear(); },
-    },
-    template: `
+<template>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <!-- Nav -->
         <nav class="flex items-center justify-between gap-4 flex-wrap">
@@ -108,15 +43,15 @@ createApp({
             enter-from-class="opacity-0"
             enter-to-class="opacity-100"
         >
-        <section id="about" class="mt-6 p-6 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/10 via-slate-800/20 to-cyan-500/10 shadow-lg">
-            <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-white">Hello, I'm a Fullstack Developer specializing in Laravel</h1>
-            <p class="text-slate-300">{{ profile.summary }}</p>
-            <div class="flex flex-wrap gap-2 mt-3">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-map-pin"></i> {{ profile.location }}</span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-terminal-window"></i> Fullstack</span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-lightning"></i> Problem Solver</span>
-            </div>
-        </section>
+            <section id="about" class="mt-6 p-6 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/10 via-slate-800/20 to-cyan-500/10 shadow-lg">
+                <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-white">Hello, I'm a Fullstack Developer specializing in Laravel.</h1>
+                <p class="text-slate-300">{{ profile.summary }}</p>
+                <div class="flex flex-wrap gap-2 mt-3">
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-map-pin"></i> {{ profile.location }}</span>
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-terminal-window"></i> Fullstack</span>
+                    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-lightning"></i> Problem Solver</span>
+                </div>
+            </section>
         </transition>
 
         <!-- Skills -->
@@ -137,7 +72,7 @@ createApp({
                     <select v-model="filters.tech" class="px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white">
                         <option v-for="opt in techOptions" :key="opt" :value="opt">{{ opt }}</option>
                     </select>
-                    <button class="px-3 py-2 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-500 text-white font-semibold transition hover:brightness-110 shadow-lg" @click="filters.search=''; filters.tech='All'">Reset</button>
+                    <button class="px-3 py-2 rounded-lg bg-white/10 text-white font-semibold transition hover:bg-white/20 active:bg-white/25 border border-white/20 shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-cyan-300/40" @click="filters.search=''; filters.tech='All'">Reset</button>
                 </div>
 
                 <transition-group tag="div"
@@ -166,10 +101,10 @@ createApp({
                 <h3 class="text-base font-semibold text-white">Highlights</h3>
                 <p class="text-slate-300 mb-2">Key achievements and areas of focus:</p>
                 <ul class="list-disc pl-5 text-slate-300 space-y-1">
-                  <li>Experienced in developing and maintaining scalable web applications</li>
-        <li>Strong understanding of backend logic, data flow, and system integration</li>
-        <li>Database design and management for reliable data handling</li>
-        <li>Focus on clean code, maintainability, and continuous improvement</li>
+                    <li>Experienced in developing and maintaining scalable web applications</li>
+                    <li>Strong understanding of backend logic, data flow, and system integration</li>
+                    <li>Database design and management for reliable data handling</li>
+                    <li>Focus on clean code, maintainability, and continuous improvement</li>
                 </ul>
                 <div class="flex flex-wrap gap-2 mt-3">
                     <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm transition hover:bg-slate-800/70">
@@ -192,5 +127,71 @@ createApp({
 
         <footer class="mt-8 text-center text-slate-400 text-sm">© {{ currentYear() }} — Built with Vue</footer>
     </div>
-    `,
-}).mount('#app');
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            mobileNavOpen: false,
+            profile: {
+                name: "Fa'iq Haidar",
+                title: 'Fullstack Developer',
+                summary: 'With 2 years of experience building robust web applications, I am skilled in designing functional features, managing databases, and ensuring application stability and usability. I work well in team environments and remain committed to continuous improvement in software quality and development practices.',
+                location: 'Indonesia',
+                socials: [
+                    { name: 'GitHub', url: 'https://github.com/faiqhaidar12', icon: 'ph-thin ph-github-logo' },
+                    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/faiq-haidar-763335219/', icon: 'ph-thin ph-linkedin-logo' },
+                    { name: 'Email', url: 'mailto:faiqhaidar1@gmail.com', icon: 'ph-thin ph-envelope' },
+                ],
+                stacks: ['Laravel', 'Vue', 'Livewire', 'Tailwind', 'MySQL', 'REST API', 'Vite'],
+            },
+            filters: {
+                search: '',
+                tech: 'All',
+            },
+            techOptions: ['All', 'Laravel', 'Vue', 'API', 'Tailwind', 'Livewire', 'Bootstrap'],
+            projects: [
+                {
+                    name: 'Guruinovatif.id',
+                    desc: 'Certified online learning platform for educators. Develop teaching skills through courses, webinars, and certifications.',
+                    tech: ['Laravel', 'Tailwind','Livewire'],
+                    link: 'https://guruinovatif.id/'
+                },
+                {
+                    name: 'Komunitas Guru Inovatif',
+                    desc: 'Community platform for innovative educators to share resources, ideas, and teaching experiences.',
+                    tech: ['Laravel', 'Livewire', 'API'],
+                    link: 'https://komunitas.guruinovatif.id/'
+                },
+                {
+                    name: 'Karya Guru Inovatif',
+                    desc: 'Public repository of documents, teaching modules, educational materials, articles, and learning media contributed by creators.',
+                    tech: ['Laravel','Livewire','Vue'],
+                    link: 'https://karya.guruinovatif.id/'
+                },
+                {
+                    name: 'Kreator Guru Inovatif',
+                    desc: 'Platform providing opportunities for anyone to contribute educational content: teaching modules, materials, articles, and event hosting.',
+                    tech: ['Laravel', 'Bootstrap'],
+                    link: 'https://kreator.guruinovatif.id/'
+                },
+            ],
+        };
+    },
+    computed: {
+        filteredProjects() {
+            const term = this.filters.search.toLowerCase();
+            const tech = this.filters.tech;
+            return this.projects.filter(p => {
+                const matchTerm = !term || (p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term));
+                const matchTech = tech === 'All' || p.tech.includes(tech);
+                return matchTerm && matchTech;
+            });
+        },
+    },
+    methods: {
+        currentYear() { return new Date().getFullYear(); },
+    },
+};
+</script>
