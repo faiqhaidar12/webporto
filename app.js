@@ -76,12 +76,12 @@ createApp({
             </div>
             <!-- Desktop links -->
             <div class="hidden sm:flex items-center gap-3 text-sm">
-                <a href="#about" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white">About</a>
-                <a href="#projects" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white">Projects</a>
-                <a href="#contact" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-white/10 hover:text-white">Contact</a>
+                <a href="#about" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 hover:text-white transition">About</a>
+                <a href="#projects" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 hover:text-white transition">Projects</a>
+                <a href="#contact" class="px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-800/50 hover:text-white transition">Contact</a>
             </div>
             <!-- Mobile toggle -->
-            <button class="sm:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white" @click="mobileNavOpen = !mobileNavOpen" aria-label="Toggle navigation">
+            <button class="sm:hidden inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white" @click="mobileNavOpen = !mobileNavOpen" aria-label="Toggle navigation">
                 <i class="ph-thin ph-list"></i>
                 Menu
             </button>
@@ -95,9 +95,9 @@ createApp({
                 leave-to-class="opacity-0 -translate-y-2"
             >
                 <div v-if="mobileNavOpen" class="w-full sm:hidden mt-2 space-y-2">
-                    <a href="#about" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-white/5 text-slate-200 hover:bg-white/10 transition">About</a>
-                    <a href="#projects" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-white/5 text-slate-200 hover:bg-white/10 transition">Projects</a>
-                    <a href="#contact" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-white/5 text-slate-200 hover:bg-white/10 transition">Contact</a>
+                    <a href="#about" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-slate-800/30 text-slate-200 hover:bg-slate-800/50 transition">About</a>
+                    <a href="#projects" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-slate-800/30 text-slate-200 hover:bg-slate-800/50 transition">Projects</a>
+                    <a href="#contact" @click="mobileNavOpen=false" class="block px-3 py-2 rounded-lg bg-slate-800/30 text-slate-200 hover:bg-slate-800/50 transition">Contact</a>
                 </div>
             </transition>
         </nav>
@@ -108,22 +108,22 @@ createApp({
             enter-from-class="opacity-0"
             enter-to-class="opacity-100"
         >
-        <section id="about" class="mt-6 p-6 rounded-2xl border border-white/10 bg-gradient-to-b from-violet-400/10 to-cyan-400/10">
+        <section id="about" class="mt-6 p-6 rounded-2xl border border-violet-500/30 bg-gradient-to-br from-violet-500/10 via-slate-800/20 to-cyan-500/10 shadow-lg">
             <h1 class="text-2xl sm:text-3xl font-bold mb-2 text-white">Hello, I'm a Fullstack Developer specializing in Laravel</h1>
             <p class="text-slate-300">{{ profile.summary }}</p>
             <div class="flex flex-wrap gap-2 mt-3">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm"><i class="ph-thin ph-map-pin"></i> {{ profile.location }}</span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm"><i class="ph-thin ph-terminal-window"></i> Fullstack</span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm"><i class="ph-thin ph-lightning"></i> Problem Solver</span>
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-map-pin"></i> {{ profile.location }}</span>
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-terminal-window"></i> Fullstack</span>
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm"><i class="ph-thin ph-lightning"></i> Problem Solver</span>
             </div>
         </section>
         </transition>
 
         <!-- Skills -->
         <h2 class="mt-7 mb-3 text-lg font-semibold text-white">Technical Skills</h2>
-        <div class="rounded-xl border border-white/10 bg-white/5 p-4">
+        <div class="rounded-xl border border-slate-700 bg-slate-800/30 p-4 shadow">
             <div class="flex flex-wrap gap-2">
-                <span v-for="s in profile.stacks" :key="s" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm">{{ s }}</span>
+                <span v-for="s in profile.stacks" :key="s" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-violet-500/20 to-cyan-500/20 border border-violet-500/30 text-white text-sm">{{ s }}</span>
             </div>
         </div>
 
@@ -131,13 +131,13 @@ createApp({
         <h2 id="projects" class="mt-7 mb-3 text-lg font-semibold text-white">Featured Projects</h2>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
             <!-- Left: list + filters -->
-            <div class="lg:col-span-7 rounded-xl border border-white/10 bg-white/5 p-4">
+            <div class="lg:col-span-7 rounded-xl border border-slate-700 bg-slate-800/30 p-4 shadow">
                 <div class="flex flex-wrap gap-2 mb-3">
-                    <input type="text" v-model="filters.search" placeholder="Search projects..." class="flex-1 min-w-[160px] px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white placeholder-slate-400 focus:outline-none">
-                    <select v-model="filters.tech" class="px-3 py-2 rounded-lg bg-white/10 border border-white/20 text-white">
+                    <input type="text" v-model="filters.search" placeholder="Search projects..." class="flex-1 min-w-[160px] px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white placeholder-slate-400 focus:outline-none focus:border-violet-500">
+                    <select v-model="filters.tech" class="px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700 text-white">
                         <option v-for="opt in techOptions" :key="opt" :value="opt">{{ opt }}</option>
                     </select>
-                    <button class="px-3 py-2 rounded-lg bg-gradient-to-br from-cyan-400 to-violet-400 text-slate-900 font-semibold transition hover:brightness-110" @click="filters.search=''; filters.tech='All'">Reset</button>
+                    <button class="px-3 py-2 rounded-lg bg-gradient-to-br from-cyan-500 to-violet-500 text-white font-semibold transition hover:brightness-110 shadow-lg" @click="filters.search=''; filters.tech='All'">Reset</button>
                 </div>
 
                 <transition-group tag="div"
@@ -149,20 +149,20 @@ createApp({
                     leave-to-class="opacity-0 -translate-y-1"
                     move-class="transition-transform"
                 >
-                    <div v-for="p in filteredProjects" :key="p.name" class="border-t border-white/10 pt-3 mt-3 first:border-t-0 first:pt-0 first:mt-0 rounded-lg -mx-2 px-2 hover:bg-white/5 transition">
+                    <div v-for="p in filteredProjects" :key="p.name" class="border-t border-slate-700 pt-3 mt-3 first:border-t-0 first:pt-0 first:mt-0 rounded-lg -mx-2 px-2 hover:bg-slate-800/50 transition">
                         <div class="flex items-center justify-between">
                             <h3 class="text-base font-semibold text-white">{{ p.name }}</h3>
                         </div>
                         <p class="text-slate-300 mt-1">{{ p.desc }}</p>
                         <div class="flex flex-wrap gap-2 mt-2">
-                            <span v-for="t in p.tech" :key="t" class="text-xs px-2 py-1 rounded-full bg-white/10 text-white">{{ t }}</span>
+                            <span v-for="t in p.tech" :key="t" class="text-xs px-2 py-1 rounded-full bg-violet-500/20 border border-violet-500/30 text-violet-200">{{ t }}</span>
                         </div>
                     </div>
                 </transition-group>
             </div>
 
             <!-- Right: highlight -->
-            <div class="lg:col-span-5 rounded-xl border border-white/10 bg-white/5 p-4 transition hover:-translate-y-0.5">
+            <div class="lg:col-span-5 rounded-xl border border-slate-700 bg-slate-800/30 p-4 shadow transition hover:-translate-y-0.5">
                 <h3 class="text-base font-semibold text-white">Highlights</h3>
                 <p class="text-slate-300 mb-2">Key achievements and areas of focus:</p>
                 <ul class="list-disc pl-5 text-slate-300 space-y-1">
@@ -172,7 +172,7 @@ createApp({
         <li>Focus on clean code, maintainability, and continuous improvement</li>
                 </ul>
                 <div class="flex flex-wrap gap-2 mt-3">
-                    <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm transition hover:bg-white/15">
+                    <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm transition hover:bg-slate-800/70">
                         <i :class="s.icon"></i> {{ s.name }}
                     </a>
                 </div>
@@ -180,11 +180,11 @@ createApp({
         </div>
 
         <!-- Contact -->
-        <section id="contact" class="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+        <section id="contact" class="mt-4 rounded-xl border border-slate-700 bg-slate-800/30 p-4 shadow">
             <h3 class="text-base font-semibold text-white">Contact</h3>
             <p class="text-slate-300">Need help building your product? Send me an email or connect via LinkedIn.</p>
             <div class="flex flex-wrap gap-2 mt-2">
-                <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm">
+                <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/50 border border-slate-700 text-white text-sm hover:bg-slate-800/70 transition">
                     <i :class="s.icon"></i> {{ s.name }}
                 </a>
             </div>
