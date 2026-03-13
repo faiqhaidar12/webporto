@@ -24,7 +24,22 @@
   </head>
   <body>
     <div id="app" class="min-h-screen bg-slate-900 text-slate-200"></div>
-
+<div id="leaderboard-container-1">
+  <iframe 
+    src="https://tnyi-cap.on-forge.com/leaderboard/embed?token=34f627bd-ac24-4186-b672-c9223139bf80" 
+    id="leaderboard-iframe-1"
+    width="100%" 
+    style="border:none; overflow:hidden;"
+    scrolling="no"
+  ></iframe>
+  <script>
+    window.addEventListener('message', function(e) {
+      if (e.data.type === 'leaderboard-resize') {
+        document.getElementById('leaderboard-iframe-1').style.height = e.data.height + 'px';
+      }
+    });
+  </script>
+</div>
       <script>
         const { loadModule } = window['vue3-sfc-loader'];
         const options = {
