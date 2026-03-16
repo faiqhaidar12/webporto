@@ -25,22 +25,7 @@
   <body>
     <div id="app" class="min-h-screen bg-slate-900 text-slate-200"></div>
 
-    <div id="leaderboard-container-1">
-  <iframe 
-    src="https://caps.tnyi.co.id/leaderboard/embed?token=1010ce57-6463-4756-a874-3fb633783d03" 
-    id="leaderboard-iframe-1"
-    width="100%" 
-    style="border:none; overflow:hidden;"
-    scrolling="no"
-  ></iframe>
-  <script>
-    window.addEventListener('message', function(e) {
-      if (e.data.type === 'leaderboard-resize') {
-        document.getElementById('leaderboard-iframe-1').style.height = e.data.height + 'px';
-      }
-    });
-  </script>
-</div>
+   <div id="ld-1"> <iframe src="https://caps.tnyi.co.id/leaderboard/embed?token=1010ce57-6463-4756-a874-3fb633783d03&program_id=1" id="if-1" width="100%" style="border:none;overflow:hidden;" scrolling="no"></iframe> <script> window.addEventListener('message', function(e){ if(e.data.type === 'leaderboard-resize'){ document.getElementById('if-1').style.height = e.data.height + 'px'; } }); </script> </div>
     
       <script>
         const { loadModule } = window['vue3-sfc-loader'];
