@@ -1,106 +1,125 @@
 <template>
-    <!-- GitHub-like layout -->
-    <div :class="['min-h-screen', isDark ? 'bg-[#0d1117] text-[#c9d1d9]' : 'bg-[#f6f8fa] text-[#24292f]']">
+    <div class="min-h-screen font-sans transition-colors duration-300 text-zinc-900 dark:text-zinc-100">
         <!-- Header -->
-        <header :class="['sticky top-0 z-40 backdrop-blur border-b', isDark ? 'bg-[#0d1117]/95 border-[#30363d]' : 'bg-white/95 border-[#d0d7de]']">
-            <div class="mx-auto max-w-6xl px-4 py-3 flex items-center gap-3">
-                <a href="#" :class="['inline-flex items-center gap-2', isDark ? 'text-white' : 'text-[#24292f]']">
-                    <svg viewBox="0 0 16 16" width="24" height="24" aria-hidden="true" :class="isDark ? 'fill-white' : 'fill-[#24292f]'"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8Z"></path></svg>
-                    <span class="font-semibold">{{ profile.name }}</span>
+        <header class="sticky top-0 z-40 backdrop-blur-md bg-white/70 dark:bg-zinc-950/70 border-b border-zinc-200 dark:border-zinc-800">
+            <div class="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+                <a href="#" class="text-xl font-bold tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    {{ profile.name.split(' ')[0] }}<span class="text-blue-600 dark:text-blue-500">.</span>
                 </a>
-                <div class="ml-auto flex items-center gap-3 w-full sm:w-auto">
-                    <input v-model="filters.search" type="search" placeholder="Search" :class="['w-full sm:w-64 px-3 py-1.5 rounded-md focus:outline-none focus:ring-2', isDark ? 'bg-[#0d1117] border border-[#30363d] text-[#c9d1d9] placeholder-[#8b949e] focus:ring-[#1f6feb]' : 'bg-white border border-[#d0d7de] text-[#24292f] placeholder-[#656d76] focus:ring-[#0969da]']" />
-                    <button :class="['sm:hidden px-3 py-1.5 rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-white' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f]']" @click="mobileNavOpen=!mobileNavOpen">
-                        <i class="ph-thin ph-list"></i>
+                
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#about" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">About</a>
+                    <a href="#projects" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <button @click="toggleTheme" class="p-2 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors" aria-label="Toggle theme">
+                        <i v-if="isDark" class="ph-thin ph-sun text-xl"></i>
+                        <i v-else class="ph-thin ph-moon text-xl"></i>
                     </button>
-                    <button :class="['px-3 py-1.5 rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-white hover:bg-[#30363d]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f] hover:bg-white']" @click="isDark = !isDark" aria-label="Toggle theme">
-                        {{ isDark ? 'Light' : 'Dark' }}
+                    <button class="md:hidden p-2 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors" @click="mobileNavOpen = !mobileNavOpen">
+                        <i class="ph-thin ph-list text-xl"></i>
                     </button>
                 </div>
             </div>
-            <nav :class="['border-t', isDark ? 'border-[#30363d]' : 'border-[#d0d7de]']">
-                <div class="mx-auto max-w-6xl px-4 flex items-center gap-6 text-sm overflow-x-auto">
-                    <a href="#about" :class="['py-3 inline-flex items-center gap-2 border-b-2 border-transparent', isDark ? 'text-[#8b949e] hover:text-white hover:border-[#1f6feb]' : 'text-[#656d76] hover:text-[#24292f] hover:border-[#0969da]']">Overview</a>
-                    <a href="#projects" :class="['py-3 inline-flex items-center gap-2 border-b-2 border-transparent', isDark ? 'text-[#8b949e] hover:text-white hover:border-[#1f6feb]' : 'text-[#656d76] hover:text-[#24292f] hover:border-[#0969da]']">Projects</a>
-                    <a href="#contact" :class="['py-3 inline-flex items-center gap-2 border-b-2 border-transparent', isDark ? 'text-[#8b949e] hover:text-white hover:border-[#1f6feb]' : 'text-[#656d76] hover:text-[#24292f] hover:border-[#0969da]']">Contact</a>
-                </div>
-            </nav>
+            
+            <!-- Mobile Nav -->
             <transition enter-active-class="transition duration-200" enter-from-class="opacity-0 -translate-y-2" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition duration-150" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                <div v-if="mobileNavOpen" :class="['sm:hidden border-t', isDark ? 'border-[#30363d]' : 'border-[#d0d7de]']">
-                    <div class="px-4 py-2 space-y-2">
-                        <a href="#about" @click="mobileNavOpen=false" :class="['block px-3 py-2 rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-white' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f]']">Overview</a>
-                        <a href="#projects" @click="mobileNavOpen=false" :class="['block px-3 py-2 rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-white' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f]']">Projects</a>
-                        <a href="#contact" @click="mobileNavOpen=false" :class="['block px-3 py-2 rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-white' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f]']">Contact</a>
-                    </div>
+                <div v-if="mobileNavOpen" class="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-6 py-4 space-y-4 shadow-lg absolute w-full">
+                    <a href="#about" @click="mobileNavOpen=false" class="block text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium">About</a>
+                    <a href="#projects" @click="mobileNavOpen=false" class="block text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium">Projects</a>
+                    <a href="#contact" @click="mobileNavOpen=false" class="block text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium">Contact</a>
                 </div>
             </transition>
         </header>
 
-        <!-- Content -->
-        <main class="mx-auto max-w-6xl px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- Left: Profile sidebar -->
-            <aside class="md:col-span-1">
-                <div :class="['rounded-lg border p-4', isDark ? 'border-[#30363d] bg-[#0d1117]' : 'border-[#d0d7de] bg-white']">
-                    <div :class="['w-24 h-24 rounded-full mb-3 flex items-center justify-center font-semibold text-lg select-none', isDark ? 'bg-[#161b22] text-white border border-[#30363d]' : 'bg-[#eef2f7] text-[#24292f] border border-[#d0d7de]']">{{ initials }}</div>
-                    <h1 :class="['text-xl font-semibold', isDark ? 'text-white' : 'text-[#24292f]']">{{ profile.name }}</h1>
-                    <p :class="[isDark ? 'text-[#8b949e]' : 'text-[#656d76]']">{{ profile.title }}</p>
-                    <p :class="['mt-3', isDark ? 'text-[#c9d1d9]' : 'text-[#24292f]']">{{ profile.summary }}</p>
-                    <div :class="['mt-3 inline-flex items-center gap-2', isDark ? 'text-[#8b949e]' : 'text-[#656d76]']"><i class="ph-thin ph-map-pin"></i> {{ profile.location }}</div>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" :class="['inline-flex items-center gap-2 px-3 py-1.5 rounded-md border text-sm transition', isDark ? 'bg-[#21262d] border-[#30363d] text-white hover:bg-[#30363d]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f] hover:bg-white']">
-                            <i :class="s.icon"></i> {{ s.name }}
-                        </a>
+        <main class="mx-auto max-w-5xl px-6 py-12 md:py-24">
+            <!-- Hero -->
+            <section id="about" class="py-10 md:py-20 flex flex-col items-start max-w-3xl">
+                <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/50 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Available for work
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                    Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-500 dark:from-blue-400 dark:to-indigo-400">{{ profile.name }}</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 font-light">
+                    {{ profile.summary }}
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="px-6 py-3 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="px-6 py-3 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 font-medium transition-colors">
+                        Contact Me
+                    </a>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="py-10 md:py-16">
+                <p class="text-sm font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-500 mb-6">Tools & Technologies</p>
+                <div class="flex flex-wrap gap-3">
+                    <span v-for="skill in profile.stacks" :key="skill" class="px-4 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 text-sm font-medium hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-sm">
+                        {{ skill }}
+                    </span>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section id="projects" class="py-16 md:py-24">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Selected Work</h2>
+                        <p class="text-zinc-600 dark:text-zinc-400 max-w-xl">A collection of projects I've built, focusing on real-world impact, excellent user experiences, and robust architectures.</p>
                     </div>
                 </div>
-                <div :class="['mt-6 rounded-lg border p-4', isDark ? 'border-[#30363d] bg-[#0d1117]' : 'border-[#d0d7de] bg-white']">
-                    <h2 :class="['font-semibold mb-2', isDark ? 'text-white' : 'text-[#24292f]']">Skills</h2>
-                    <div class="flex flex-wrap gap-2">
-                        <span v-for="s in profile.stacks" :key="s" :class="['px-2 py-1 text-xs rounded-md border', isDark ? 'bg-[#21262d] border-[#30363d] text-[#c9d1d9]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f]']">{{ s }}</span>
-                    </div>
-                </div>
-            </aside>
 
-            <!-- Right: repo-like cards -->
-            <section class="md:col-span-2">
-                <div id="projects" :class="['rounded-lg border p-4', isDark ? 'border-[#30363d] bg-[#0d1117]' : 'border-[#d0d7de] bg-white']">
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <input type="text" v-model="filters.search" placeholder="Search projects" :class="['flex-1 min-w-[160px] px-3 py-1.5 rounded-md focus:outline-none focus:ring-2', isDark ? 'bg-[#0d1117] border border-[#30363d] text-[#c9d1d9] placeholder-[#8b949e] focus:ring-[#1f6feb]' : 'bg-white border border-[#d0d7de] text-[#24292f] placeholder-[#656d76] focus:ring-[#0969da]']">
-                        <select v-model="filters.tech" :class="['px-3 py-1.5 rounded-md', isDark ? 'bg-[#0d1117] border border-[#30363d] text-[#c9d1d9]' : 'bg-white border border-[#d0d7de] text-[#24292f]']">
-                            <option v-for="opt in techOptions" :key="opt" :value="opt">{{ opt }}</option>
-                        </select>
-                        <button :class="['px-3 py-1.5 rounded-md border transition', isDark ? 'bg-[#21262d] border-[#30363d] text-white hover:bg-[#30363d]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f] hover:bg-white']" @click="filters.search=''; filters.tech='All'">Reset</button>
-                    </div>
-
-                    <transition-group tag="div" enter-active-class="transition duration-300" enter-from-class="opacity-0 -translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
-                        <a v-for="p in filteredProjects" :key="p.name" :href="p.link" target="_blank" rel="noopener" :class="['block border-t py-3 first:border-t-0 group', isDark ? 'border-[#30363d]' : 'border-[#d0d7de]']">
-                            <div class="flex items-center justify-between">
-                                <h3 :class="['group-hover:underline font-semibold', isDark ? 'text-[#58a6ff]' : 'text-[#0969da]']">{{ p.name }}</h3>
-                                <span :class="['text-xs', isDark ? 'text-[#8b949e]' : 'text-[#656d76]']">External</span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <a v-for="p in projects" :key="p.name" :href="p.link" target="_blank" rel="noopener" class="group block p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:-translate-y-1 hover:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-blue-500/10 transition-all duration-300">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
+                                <i class="ph-thin ph-folder-open text-2xl"></i>
                             </div>
-                            <p :class="['mt-1', isDark ? 'text-[#c9d1d9]' : 'text-[#24292f]']">{{ p.desc }}</p>
-                            <div class="flex flex-wrap gap-2 mt-2">
-                                <span v-for="t in p.tech" :key="t" :class="['text-xs px-2 py-0.5 rounded-full border', isDark ? 'bg-[#21262d] border-[#30363d] text-[#8b949e]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#656d76]']">{{ t }}</span>
-                            </div>
-                        </a>
-                    </transition-group>
+                            <i class="ph-thin ph-arrow-up-right text-xl text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{{ p.name }}</h3>
+                        <p class="text-zinc-600 dark:text-zinc-400 mb-6 line-clamp-3">{{ p.desc }}</p>
+                        <div class="flex flex-wrap gap-2 mt-auto">
+                            <span v-for="t in p.tech" :key="t" class="text-xs px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium">
+                                {{ t }}
+                            </span>
+                        </div>
+                    </a>
                 </div>
+            </section>
 
-                <section id="contact" :class="['mt-6 rounded-lg border p-4', isDark ? 'border-[#30363d] bg-[#0d1117]' : 'border-[#d0d7de] bg-white']">
-                    <h3 :class="['font-semibold', isDark ? 'text-white' : 'text-[#24292f]']">Contact</h3>
-                    <p :class="[isDark ? 'text-[#c9d1d9]' : 'text-[#24292f]']">Need help building your product? Email or connect via LinkedIn.</p>
-                    <div class="flex flex-wrap gap-2 mt-2">
-                        <a v-for="s in profile.socials" :key="s.name" :href="s.url" target="_blank" rel="noopener" :class="['inline-flex items-center gap-2 px-3 py-1.5 rounded-md border text-sm transition', isDark ? 'bg-[#21262d] border-[#30363d] text-white hover:bg-[#30363d]' : 'bg-[#f6f8fa] border-[#d0d7de] text-[#24292f] hover:bg-white']">
-                            <i :class="s.icon"></i> {{ s.name }}
-                        </a>
-                    </div>
-                </section>
+            <!-- Contact -->
+            <section id="contact" class="py-16 md:py-24 border-t border-zinc-200 dark:border-zinc-800 flex flex-col items-center text-center">
+                <div class="w-16 h-16 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-8">
+                    <i class="ph-thin ph-paper-plane-tilt text-3xl"></i>
+                </div>
+                <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">Let's work together</h2>
+                <p class="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mb-10">
+                    I'm currently looking for new opportunities. Whether you have a project to discuss or just want to say hi, my inbox is open.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a :href="profile.socials.find(s => s.name === 'Email')?.url" class="px-8 py-4 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors shadow-lg shadow-blue-500/25">
+                        Say Hello
+                    </a>
+                    <a v-for="s in profile.socials.filter(s => s.name !== 'Email')" :key="s.name" :href="s.url" target="_blank" rel="noopener" class="px-8 py-4 rounded-full border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 font-medium transition-colors flex items-center gap-2">
+                        <i :class="s.icon" class="text-lg"></i> {{ s.name }}
+                    </a>
+                </div>
             </section>
         </main>
 
-        <footer :class="['border-t py-6 text-center', isDark ? 'border-[#30363d] text-[#8b949e]' : 'border-[#d0d7de] text-[#656d76]']">© {{ currentYear() }} — Built with Vue</footer>
-</div>
+        <footer class="border-t border-zinc-200 dark:border-zinc-800 py-10 text-center text-zinc-500 dark:text-zinc-400 text-sm">
+            <p>Designed visually, built cleanly. &copy; {{ new Date().getFullYear() }} {{ profile.name }}.</p>
+        </footer>
+    </div>
 </template>
-
 
 <script>
 export default {
@@ -111,65 +130,71 @@ export default {
             profile: {
                 name: "Fa'iq Haidar",
                 title: 'Fullstack Web Developer',
-                summary: 'With 2 years of experience building robust web applications, I am skilled in designing functional features, managing databases, and ensuring application stability and usability. I work well in team environments and remain committed to continuous improvement in software quality and development practices.',
+                summary: 'With 2 years of experience building robust web applications, I specialize in designing functional features, managing databases, and ensuring application stability. I craft elegant and high-performing digital experiences.',
                 location: 'Indonesia',
                 socials: [
                     { name: 'GitHub', url: 'https://github.com/faiqhaidar12', icon: 'ph-thin ph-github-logo' },
                     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/faiq-haidar-763335219/', icon: 'ph-thin ph-linkedin-logo' },
                     { name: 'Email', url: 'mailto:faiqhaidar1@gmail.com', icon: 'ph-thin ph-envelope' },
                 ],
-                stacks: ['Laravel', 'Vue', 'Livewire', 'Tailwind', 'MySQL', 'REST API'],
+                stacks: ['Laravel', 'Vue.js', 'Livewire', 'Tailwind CSS', 'MySQL', 'REST APIs', 'Git', 'PHP'],
             },
-            filters: {
-                search: '',
-                tech: 'All',
-            },
-            techOptions: ['All', 'Laravel', 'Vue', 'API', 'Tailwind', 'Livewire', 'Bootstrap'],
             projects: [
                 {
                     name: 'Guruinovatif.id',
-                    desc: 'Certified online learning platform for educators. Develop teaching skills through courses, webinars, and certifications.',
-                    tech: ['Laravel', 'Tailwind','Livewire'],
+                    desc: 'A certified online learning platform for educators to develop teaching skills through targeted courses, engaging webinars, and rigorous certifications.',
+                    tech: ['Laravel', 'Tailwind', 'Livewire'],
                     link: 'https://guruinovatif.id/'
                 },
                 {
                     name: 'Komunitas Guru Inovatif',
-                    desc: 'Community platform for innovative educators to share resources, ideas, and teaching experiences.',
+                    desc: 'A community-driven platform allowing innovative educators to seamlessly share resources, exchange transformative ideas, and document experiences.',
                     tech: ['Laravel', 'Livewire', 'API'],
                     link: 'https://komunitas.guruinovatif.id/'
                 },
                 {
                     name: 'Karya Guru Inovatif',
-                    desc: 'Public repository of documents, teaching modules, educational materials, articles, and learning media contributed by creators.',
-                    tech: ['Laravel','Livewire','Vue'],
+                    desc: 'A comprehensive public repository hosting thousands of educational documents, teaching modules, articles, and interactive learning media.',
+                    tech: ['Laravel', 'Livewire', 'Vue'],
                     link: 'https://karya.guruinovatif.id/'
                 },
                 {
                     name: 'Kreator Guru Inovatif',
-                    desc: 'Platform providing opportunities for anyone to contribute educational content: teaching modules, materials, articles, and event hosting.',
+                    desc: 'An empowering creator platform providing tools for authors and educators to contribute and monetize high-quality modules, articles, and host live events.',
                     tech: ['Laravel', 'Bootstrap'],
                     link: 'https://kreator.guruinovatif.id/'
                 },
             ],
         };
     },
-    computed: {
-        initials() {
-            const parts = (this.profile.name || '').trim().split(/\s+/);
-            return parts.slice(0, 2).map(p => p[0]?.toUpperCase() || '').join('') || 'FH';
-        },
-        filteredProjects() {
-            const term = this.filters.search.toLowerCase();
-            const tech = this.filters.tech;
-            return this.projects.filter(p => {
-                const matchTerm = !term || (p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term));
-                const matchTech = tech === 'All' || p.tech.includes(tech);
-                return matchTerm && matchTech;
-            });
-        },
-    },
     methods: {
-        currentYear() { return new Date().getFullYear(); },
+        toggleTheme() {
+            this.isDark = !this.isDark;
+            this.applyTheme();
+            localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+        },
+        applyTheme() {
+            if (this.isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
     },
+    mounted() {
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            this.isDark = true;
+        } else {
+            this.isDark = false;
+        }
+        this.applyTheme();
+        
+        // Add scroll behavior to close mobile nav
+        window.addEventListener('scroll', () => {
+            if (this.mobileNavOpen) {
+                this.mobileNavOpen = false;
+            }
+        });
+    }
 };
 </script>

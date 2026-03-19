@@ -1,52 +1,73 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Semiclon | Fullstack Developer</title>
-    <meta name="description" content="Portofolio sederhana seorang programmer fullstack yang sering menggunakan Laravel dan Vue." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- TailwindCSS via CDN (for quick prototyping) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Vue 3 via CDN -->
-    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-      <!-- Vue 3 SFC Loader to use .vue files without bundling -->
-      <script src="https://unpkg.com/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
-    <!-- Icons -->
-    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/thin/style.css">
-    <style>
-      html { scroll-behavior: smooth; }
-    </style>
-    <!-- Inline favicon to prevent 404 without creating files -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='url(%23g)'/%3E%3Cpath d='M22 40l10-16 10 16' stroke='%230b1020' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
-  </head>
-  <body>
-    <div id="app" class="min-h-screen bg-slate-900 text-slate-200"></div>
 
-   <div id="ld-1"> <iframe src="https://caps.tnyi.co.id/leaderboard/embed?token=1010ce57-6463-4756-a874-3fb633783d03&program_id=1" id="if-1" width="100%" style="border:none;overflow:hidden;" scrolling="no"></iframe> <script> window.addEventListener('message', function(e){ if(e.data.type === 'leaderboard-resize'){ document.getElementById('if-1').style.height = e.data.height + 'px'; } }); </script> </div>
-    
-      <script>
-        const { loadModule } = window['vue3-sfc-loader'];
-        const options = {
-          moduleCache: {
-            vue: Vue,
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semiclon | Fullstack Developer</title>
+  <meta name="description"
+    content="Portofolio sederhana seorang programmer fullstack yang sering menggunakan Laravel dan Vue." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- TailwindCSS via CDN (for quick prototyping) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
           },
-          getFile(url) {
-            return fetch(url).then(res => res.ok ? res.text() : Promise.reject(res));
-          },
-          addStyle(textContent) {
-            const style = document.createElement('style');
-            style.textContent = textContent;
-            document.head.appendChild(style);
-          },
-        };
+        }
+      }
+    }
+  </script>
+  <!-- Vue 3 via CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <!-- Vue 3 SFC Loader to use .vue files without bundling -->
+  <script src="https://unpkg.com/vue3-sfc-loader/dist/vue3-sfc-loader.js"></script>
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/thin/style.css">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <!-- Inline favicon to prevent 404 without creating files -->
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1' y1='0' y2='1'%3E%3Cstop offset='0' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='8' y='8' width='48' height='48' rx='12' fill='url(%23g)'/%3E%3Cpath d='M22 40l10-16 10 16' stroke='%230b1020' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+</head>
 
-        (async () => {
-          const App = await loadModule('./app.vue', options);
-          Vue.createApp(App).mount('#app');
-        })();
-      </script>
-  </body>
-  </html>
+<body class="antialiased bg-zinc-50 dark:bg-zinc-950">
+  <div id="app"></div>
+
+  <script>
+    const { loadModule } = window['vue3-sfc-loader'];
+    const options = {
+      moduleCache: {
+        vue: Vue,
+      },
+      getFile(url) {
+        return fetch(url).then(res => res.ok ? res.text() : Promise.reject(res));
+      },
+      addStyle(textContent) {
+        const style = document.createElement('style');
+        style.textContent = textContent;
+        document.head.appendChild(style);
+      },
+    };
+
+    (async () => {
+      const App = await loadModule('./app.vue', options);
+      Vue.createApp(App).mount('#app');
+    })();
+  </script>
+</body>
+
+</html>
