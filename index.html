@@ -46,16 +46,6 @@
 
 <body class="antialiased bg-zinc-50 dark:bg-zinc-950">
   <div id="app"></div>
-<div id="ld-1">
-  <iframe src="https://caps.tnyi.co.id/leaderboard/embed?token=1010ce57-6463-4756-a874-3fb633783d03&program_id=1" id="if-1" width="100%" style="border:none;overflow:hidden;" scrolling="no"></iframe>
-  <script>
-    window.addEventListener('message', function(e){
-      if(e.data.type === 'leaderboard-resize'){
-        document.getElementById('if-1').style.height = e.data.height + 'px';
-      }
-    });
-  </script>
-</div>
   <script>
     const { loadModule } = window['vue3-sfc-loader'];
     const options = {
